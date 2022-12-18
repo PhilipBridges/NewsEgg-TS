@@ -1,14 +1,39 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
+import { useEffect, useState } from 'react'
+import { NewsProps } from '../types'
+import NewsRow from './NewsRow'
 
 export default function NewsList() {
+  const [news, setNews] = useState<NewsProps[]>([])
+
+  const getNewsList = async (): Promise<void> => {
+    // main key
+    // const res = await fetch(
+    //   `https://newsdata.io/api/1/news?apikey=${process.env.REACT_APP_API_KEY}&country=us`
+    // )
+
+    // alt key
+    const res = await fetch(
+      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_ALT_KEY}&pageSize=10`
+    )
+
+    const data = await res.json()
+    const newsData = data.articles
+    if (!newsData) return
+    setNews(newsData)
+  }
+
+  useEffect(() => {
+    getNewsList()
+  }, [])
+
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
         <div>
           <h2 className="text-2xl font-semibold leading-tight">Latest News</h2>
         </div>
-        <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-          <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+        <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 ">
+          <div className="inline-block min-w-full shadow rounded-lg ">
             <table className="min-w-full leading-normal">
               <thead>
                 <tr>
@@ -26,96 +51,9 @@ export default function NewsList() {
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 w-10 h-10 hidden sm:table-cell">
-                        <img
-                          className="w-full h-full rounded-full"
-                          src="https://images.unsplash.com/photo-1601046668428-94ea13437736?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="ml-3">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          Team 1
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap text-center">
-                      0
-                    </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap text-center">
-                      3
-                    </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5">
-                    <div className="flex items-center float-right">
-                      <div className="mr-3">
-                        <p className="text-gray-900 whitespace-no-wrap text-right">
-                          Team 2
-                        </p>
-                      </div>
-                      <div className="flex-shrink-0 w-10 h-10 hidden sm:table-cell">
-                        <img
-                          className="w-full h-full rounded-full"
-                          src="https://images.unsplash.com/photo-1601046668428-94ea13437736?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 w-10 h-10 hidden sm:table-cell">
-                        <img
-                          className="w-full h-full rounded-full"
-                          src="https://images.unsplash.com/photo-1601046668428-94ea13437736?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80"
-                          alt=""
-                        />
-                      </div>
-                      <div className="ml-3">
-                        <p className="text-gray-900 whitespace-no-wrap">
-                          Team 3
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap text-center">
-                      0
-                    </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap text-center">
-                      3
-                    </p>
-                  </td>
-                  <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm w-2/5">
-                    <div className="flex items-center float-right">
-                      <div className="mr-3">
-                        <p className="text-gray-900 whitespace-no-wrap text-right">
-                          Team 4
-                        </p>
-                      </div>
-                      <div className="flex-shrink-0 w-10 h-10 hidden sm:table-cell">
-                        <img
-                          className="w-full h-full rounded-full"
-                          src="https://images.unsplash.com/photo-1601046668428-94ea13437736?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2167&q=80"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
+              {news
+                ? news.map((data) => <NewsRow key={data.publishedAt}  />)
+                : null}
             </table>
           </div>
         </div>
