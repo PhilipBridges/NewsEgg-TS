@@ -13,7 +13,7 @@ export default function NewsList() {
 
     // alt key
     const res = await fetch(
-      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_ALT_KEY}&pageSize=10`
+      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_ALT_KEY}&pageSize=25`
     )
 
     const data = await res.json()
@@ -38,21 +38,33 @@ export default function NewsList() {
               <thead>
                 <tr>
                   <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Home
+                    Headline
                   </th>
                   <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Res.
+                    Source
                   </th>
                   <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Res.
+                    Date
                   </th>
                   <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Away
+                    Author
                   </th>
                 </tr>
               </thead>
               {news
-                ? news.map((data) => <NewsRow key={data.publishedAt}  />)
+                ? news.map((data) => (
+                    <NewsRow
+                      key={data.url}
+                      author={data.author}
+                      content={data.content}
+                      description={data.description}
+                      publishedAt={data.publishedAt}
+                      source={data.source}
+                      title={data.title}
+                      url={data.url}
+                      urlToImage={data.urlToImage}
+                    />
+                  ))
                 : null}
             </table>
           </div>
