@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 
 const Search = (): JSX.Element => {
   const [text, setText] = useState<string>('')

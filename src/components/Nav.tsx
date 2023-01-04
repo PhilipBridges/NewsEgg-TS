@@ -1,27 +1,45 @@
-import { Fragment, useState } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useState } from 'react'
+import { Disclosure } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Sources } from '../helpers/enums'
+import { getNewsList } from '../helpers/calls'
+
+// const navigation = [
+//   { name: 'All', href: '#', current: true },
+//   { name: 'Reuters', href: '#', current: false },
+//   { name: 'WaPo', href: '#', current: false },
+//   { name: 'Fox', href: '#', current: false },
+//   { name: 'CNN', href: '#', current: false },
+//   { name: 'NBC', href: '#', current: false },
+//   { name: 'BBC', href: '#', current: false },
+// ]
 
 const navigation = [
-  { name: 'All', href: '#', current: true },
-  { name: 'Reuters', href: '#', current: false },
-  { name: 'WaPo', href: '#', current: false },
-  { name: 'Fox', href: '#', current: false },
-  { name: 'CNN', href: '#', current: false },
-  { name: 'NBC', href: '#', current: false },
-  { name: 'BBC', href: '#', current: false },
+  { name: Sources.DEFAULT, href: '#', current: true },
+  { name: Sources.REUTERS, href: '#', current: false },
+  { name: Sources.WAPO, href: '#', current: false },
+  { name: Sources.FOX, href: '#', current: false },
+  { name: Sources.CNN, href: '#', current: false },
+  { name: Sources.NBC, href: '#', current: false },
+  { name: Sources.BBC, href: '#', current: false },
 ]
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Nav() {
+// @ts-ignore
+export default function Nav({ refreshNews }) {
   const [current, setCurrent] = useState<string>('')
 
-  const changeCurrent = (item: string) => {
+  const changeCurrent = async (item: Sources) => {
     setCurrent(item)
+    const newsFetch = await getNewsList(Sources.WAPO)
+    if (!newsFetch) return
+    // DON'T DO THIS IT'S A STRINg
+    refreshNews(item)
   }
+
   return (
     <Disclosure as="nav" className="bg-gray-800 fixed w-full">
       {({ open }) => (
@@ -57,10 +75,9 @@ export default function Nav() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <button
                         onClick={() => changeCurrent(item.name)}
                         key={item.name}
-                        href={item.href}
                         className={classNames(
                           current === item.name
                             ? 'bg-gray-900 text-white'
@@ -70,7 +87,7 @@ export default function Nav() {
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
-                      </a>
+                      </button>
                     ))}
                   </div>
                 </div>

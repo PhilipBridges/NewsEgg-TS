@@ -1,31 +1,7 @@
-import { useEffect, useState } from 'react'
-import { NewsProps } from '../types'
+import { NewslistProps, NewsProps } from '../types'
 import NewsRow from './NewsRow'
 
-export default function NewsList() {
-  const [news, setNews] = useState<NewsProps[]>([])
-
-  const getNewsList = async (): Promise<void> => {
-    // main key
-    // const res = await fetch(
-    //   `https://newsdata.io/api/1/news?apikey=${process.env.REACT_APP_API_KEY}&country=us`
-    // )
-
-    // alt key
-    const res = await fetch(
-      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_ALT_KEY}&pageSize=25`
-    )
-
-    const data = await res.json()
-    const newsData = data.articles
-    if (!newsData) return
-    setNews(newsData)
-  }
-
-  useEffect(() => {
-    getNewsList()
-  }, [])
-
+export default function NewsList({ articles, totalResults }: NewslistProps) {
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
@@ -51,8 +27,8 @@ export default function NewsList() {
                   </th>
                 </tr>
               </thead>
-              {news
-                ? news.map((data) => (
+              {articles
+                ? articles.map((data: NewsProps) => (
                     <NewsRow
                       key={data.url}
                       author={data.author}
