@@ -25,11 +25,10 @@ const App = (): JSX.Element => {
     }
   }, [news, setNews, refreshNews])
 
-  console.log('NOOZ', news)
   return (
     <>
       <Nav refreshNews={refreshNews} />
-      <main className="flex justify-center items-center bg-gradient-to-br from-sky-400 via-rose-400 to-lime-400  w-full">
+      <main className="flex justify-center items-center bg-gradient-to-br from-sky-400  w-full">
         {news ? (
           <NewsList articles={news.articles} totalResults={news.totalResults} />
         ) : null}

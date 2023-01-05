@@ -4,24 +4,14 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Sources } from '../helpers/enums'
 import { getNewsList } from '../helpers/calls'
 
-// const navigation = [
-//   { name: 'All', href: '#', current: true },
-//   { name: 'Reuters', href: '#', current: false },
-//   { name: 'WaPo', href: '#', current: false },
-//   { name: 'Fox', href: '#', current: false },
-//   { name: 'CNN', href: '#', current: false },
-//   { name: 'NBC', href: '#', current: false },
-//   { name: 'BBC', href: '#', current: false },
-// ]
-
 const navigation = [
-  { name: Sources.DEFAULT, href: '#', current: true },
-  { name: Sources.REUTERS, href: '#', current: false },
-  { name: Sources.WAPO, href: '#', current: false },
-  { name: Sources.FOX, href: '#', current: false },
-  { name: Sources.CNN, href: '#', current: false },
-  { name: Sources.NBC, href: '#', current: false },
-  { name: Sources.BBC, href: '#', current: false },
+  { name: Sources.DEFAULT, href: '#', current: true, displayName: 'All' },
+  { name: Sources.REUTERS, href: '#', current: false, displayName: 'Reuters' },
+  { name: Sources.WAPO, href: '#', current: false, displayName: 'WaPo' },
+  { name: Sources.FOX, href: '#', current: false, displayName: 'Fox' },
+  { name: Sources.CNN, href: '#', current: false, displayName: 'CNN' },
+  { name: Sources.NBC, href: '#', current: false, displayName: 'NBC' },
+  { name: Sources.BBC, href: '#', current: false, displayName: 'BBC' },
 ]
 
 function classNames(...classes: string[]) {
@@ -36,7 +26,6 @@ export default function Nav({ refreshNews }) {
     setCurrent(item)
     const newsFetch = await getNewsList(Sources.WAPO)
     if (!newsFetch) return
-    // DON'T DO THIS IT'S A STRINg
     refreshNews(item)
   }
 
@@ -86,7 +75,7 @@ export default function Nav({ refreshNews }) {
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
-                        {item.name}
+                        {item.displayName}
                       </button>
                     ))}
                   </div>
@@ -94,27 +83,6 @@ export default function Nav({ refreshNews }) {
               </div>
             </div>
           </div>
-
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
-            </div>
-          </Disclosure.Panel>
         </>
       )}
     </Disclosure>
