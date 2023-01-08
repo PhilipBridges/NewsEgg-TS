@@ -1,5 +1,5 @@
 ## How to use
 
-Use your own API key from https://newsapi.org or https://newsdata.io
+Powered by newscatcherapi.com!
 
 ![newsegg](https://i.imgur.com/PCxdQZQ.png 'Newsegg screenshot')
