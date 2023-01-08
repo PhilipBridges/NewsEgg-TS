@@ -2,13 +2,13 @@ import { Dispatch, SetStateAction } from "react"
 
 export type NewsProps = {
     author: string
-    content: string
-    description: string
-    publishedAt: string
-    source: { id: string | null; name: string }
+    excerpt: string
+    published_date: string
+    rights: string
     title: string
     url: string
-    urlToImage: string
+    media: string
+    _id: number
 }
 
 export type NewslistProps = {
@@ -16,6 +16,8 @@ export type NewslistProps = {
     totalResults: number
 }
 
-export type DispatchProps = {
-    setNews: Dispatch<SetStateAction<NewslistProps | undefined>>;
-}
+// No longer needed
+// export type DispatchProps = {
+//     setNews: Dispatch<SetStateAction<NewslistProps | undefined>>;
+// }
+

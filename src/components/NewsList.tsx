@@ -1,7 +1,7 @@
 import { NewslistProps, NewsProps } from '../types'
 import NewsRow from './NewsRow'
 
-export default function NewsList({ articles, totalResults }: NewslistProps) {
+export default function NewsList({ articles }: NewslistProps) {
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
@@ -30,15 +30,15 @@ export default function NewsList({ articles, totalResults }: NewslistProps) {
               {articles
                 ? articles.map((data: NewsProps) => (
                     <NewsRow
-                      key={data.url}
+                      key={data._id}
                       author={data.author}
-                      content={data.content}
-                      description={data.description}
-                      publishedAt={data.publishedAt}
-                      source={data.source}
+                      excerpt={data.excerpt}
+                      published_date={data.published_date}
+                      rights={data.rights}
                       title={data.title}
                       url={data.url}
-                      urlToImage={data.urlToImage}
+                      media={data.media}
+                      _id={data._id}
                     />
                   ))
                 : null}

@@ -1,13 +1,13 @@
 import { NewsProps } from '../types'
 
 function NewsRow(data: NewsProps) {
-  const parsedDate = new Date(data.publishedAt)
+  const parsedDate = new Date(data.published_date)
   const formattedDate = parsedDate.toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
   })
-  if (!data.content) return null
+  // if (!data.excerpt) return null
   return (
     <tbody>
       <tr>
@@ -16,14 +16,14 @@ function NewsRow(data: NewsProps) {
             <div className="flex-shrink-0 w-20 h-30 hidden sm:table-cell">
               <img
                 className="rounded-full"
-                src={data.urlToImage ? data.urlToImage : ''}
+                src={data.media ? data.media : ''}
                 alt=""
               />
             </div>
             <div className="ml-3">
               <a href={data.url}>
                 <p className="text-gray-900 whitespace-no-wrap">
-                  {data.description}
+                  {data.excerpt}
                 </p>
               </a>
             </div>
@@ -31,7 +31,7 @@ function NewsRow(data: NewsProps) {
         </td>
         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
           <p className="text-gray-900 whitespace-no-wrap text-center">
-            {data.source.name ? data.source.name : 'Unknown'}
+            {data.rights ? data.rights : 'Unknown'}
           </p>
         </td>
         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">

@@ -1,27 +1,38 @@
 import { Sources } from "./enums";
 
 export const getNewsList = async (source: Sources) => {
-    // main key
-    // const res = await fetch(
-    //   `https://newsdata.io/api/1/news?apikey=${process.env.REACT_APP_API_KEY}&country=us`
-    // )
+    const API_KEY = process.env.REACT_APP_API_KEY || ""
 
     // alt key
     if (source === Sources.DEFAULT) {
         const res = await fetch(
-            `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_ALT_KEY}&pageSize=25`
+            `https://api.newscatcherapi.com/v2/latest_headlines?countries=US&topic=business&page_size=15&not_sources=wacotrib.com`, {
+            mode: 'cors',
+            headers: {
+                "Content-Type": "application/json",
+                "X-API-KEY": API_KEY
+            }
+        }
         )
 
         const data = await res.json()
-        if (!data) return
+        console.log("DADA", data)
+        if (!data || data.error_code) return
         return data
     } else {
         const res = await fetch(
-            `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${process.env.REACT_APP_ALT_KEY}&pageSize=25`
+            `https://api.newscatcherapi.com/v2/latest_headlines?countries=US&topic=business`, {
+            mode: 'cors',
+            headers: {
+                "Content-Type": "application/json",
+                'Access-Control-Allow-Origin': "localhost",
+                "X-API-KEY": API_KEY
+            }
+        }
         )
 
         const data = await res.json()
-        if (!data) return
+        if (!data || data.error_code) return
         return data
     }
 }
