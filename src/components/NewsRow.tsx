@@ -6,7 +6,7 @@ function NewsRow(data: NewsProps) {
     day: 'numeric',
     month: 'long',
   })
-  if (!data.title) return null
+  if (!data.snippet) return null
   return (
     <tbody>
       <tr>
@@ -22,7 +22,7 @@ function NewsRow(data: NewsProps) {
             <div className="ml-3">
               <a href={data.url}>
                 <p className="text-gray-900 whitespace-no-wrap px-5 underline">
-                  {data.description}
+                  {data.snippet}
                 </p>
               </a>
             </div>
