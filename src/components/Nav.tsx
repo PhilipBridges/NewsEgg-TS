@@ -6,12 +6,12 @@ import { getNewsList } from '../helpers/calls'
 
 const navigation = [
   { name: Sources.DEFAULT, href: '#', current: true, displayName: 'All' },
-  { name: Sources.REUTERS, href: '#', current: false, displayName: 'Reuters' },
   { name: Sources.WAPO, href: '#', current: false, displayName: 'WaPo' },
   { name: Sources.FOX, href: '#', current: false, displayName: 'Fox' },
   { name: Sources.CNN, href: '#', current: false, displayName: 'CNN' },
   { name: Sources.NBC, href: '#', current: false, displayName: 'NBC' },
-  { name: Sources.BBC, href: '#', current: false, displayName: 'BBC' },
+  { name: Sources.NYT, href: '#', current: false, displayName: 'NYTimes' },
+
 ]
 
 function classNames(...classes: string[]) {

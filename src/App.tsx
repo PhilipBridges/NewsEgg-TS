@@ -29,9 +29,7 @@ const App = (): JSX.Element => {
     <>
       <Nav refreshNews={refreshNews} />
       <main className="flex justify-center items-center bg-gradient-to-br from-sky-400  w-full">
-        {news ? (
-          <NewsList articles={news.articles} totalResults={news.totalResults} />
-        ) : null}
+        {news ? <NewsList data={news.data} /> : null}
       </main>
     </>
   )

@@ -1,9 +1,8 @@
 export enum Sources {
     DEFAULT = "",
-    WAPO = "the-washington-post",
-    FOX = "fox-news",
-    REUTERS = "reuters",
-    CNN = "cnn",
-    NBC = "nbc-news",
-    BBC = "bbc-news"
+    WAPO = "washingtonpost.com",
+    FOX = "foxnews.com",
+    CNN = "cnn.com",
+    NBC = "nbcnews.com",
+    NYT = "nytimes.com"
 }

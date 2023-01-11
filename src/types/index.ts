@@ -1,21 +1,17 @@
-import { Dispatch, SetStateAction } from "react"
 
 export type NewsProps = {
-    author: string
-    content: string
-    description: string
-    publishedAt: string
-    source: { id: string | null; name: string }
+    uuid: string
     title: string
+    description: string
+    snippet: string
+    content: string
     url: string
-    urlToImage: string
+    categories: [] | string
+    source: string
+    published_at: string
+    image_url: string
 }
 
 export type NewslistProps = {
-    articles: []
-    totalResults: number
-}
-
-export type DispatchProps = {
-    setNews: Dispatch<SetStateAction<NewslistProps | undefined>>;
+    data: NewsProps[]
 }
