@@ -6,7 +6,7 @@ function NewsRow(data: NewsProps) {
     day: 'numeric',
     month: 'long',
   })
-  if (!data.description) return null
+  if (!data.title) return null
   return (
     <tbody>
       <tr>
