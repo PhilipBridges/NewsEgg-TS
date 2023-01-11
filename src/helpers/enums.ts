@@ -4,5 +4,5 @@ export enum Sources {
     FOX = "foxnews.com",
     CNN = "cnn.com",
     NBC = "nbcnews.com",
-    NYT = "nytimes.com"
+    AP = "apnews.com"
 }

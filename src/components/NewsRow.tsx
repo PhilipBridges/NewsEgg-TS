@@ -10,7 +10,7 @@ function NewsRow(data: NewsProps) {
   return (
     <tbody>
       <tr>
-        <td className="px-5 py-12 border-b border-gray-200 bg-white text-sm w-2/5">
+        <td className="px-5 py-8 border-b border-gray-200 bg-white text-sm w-2/5">
           <div className="flex items-center">
             <div className="flex-shrink-0 w-40 h-50 hidden sm:table-cell">
               <img
